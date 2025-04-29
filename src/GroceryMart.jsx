@@ -30,9 +30,13 @@ function GroceryMart() {
         toast.error("Item deleted.");
 
     }
-    // Alert box
-    // const notify = () => toast("Item Added To The List");
+    
+    function toggleComplete(Id){
+        setItems(items.map((item) =>{
+            return item.id === Id  ? { ...item , completed : !item.completed } : item ;
+        }))
 
+    }
 
 
 
@@ -58,8 +62,9 @@ function GroceryMart() {
                             <div className="perItem" key={item.id}>
 
                                 <div className="Item-name">
-                                    <input type="checkbox" />
-                                    <p>{item.text}</p>
+                                    <input type="checkbox" 
+                                    onChange = {()=> toggleComplete(item.id)}/>
+                                    <p style ={{textDecoration : item.completed ? "line-through" : "none"}} >{item.text}</p>
                                 </div>
                                 <button id="delete-btn" onClick={() => handleDelete(item.id)}>Delete</button>
                             </div>
